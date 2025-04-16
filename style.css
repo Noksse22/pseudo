@@ -1,0 +1,201 @@
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: azure; 
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 90%;
+    width: 600px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+}
+
+footer {
+    width: 100%;
+    background-color: white; 
+    padding: 50px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    margin-top: auto;
+    box-sizing: border-box;
+}
+
+.pseudo {
+    max-width: 90%;
+    width: 600px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+h1 {
+    color: #333;
+    font-size: clamp(20px, 5vw, 28px);
+    margin-top: 10px;
+}
+
+p {
+    color: #555;
+    font-size: clamp(14px, 3vw, 18px);
+    margin-bottom: 15px;
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    background-color: #5f8ca2;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: clamp(14px, 3vw, 16px);
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #496e81;
+    border-radius: 8px;
+}
+
+#pseudoList {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#pseudoList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border-left: 3px solid #5f8ca2;
+    transition: background-color 0.2s ease;
+}
+
+#pseudoList li:hover {
+    background-color: #f0f0f0;
+}
+
+.pseudo-text {
+    font-size: clamp(14px, 3vw, 18px);
+    margin-right: 10px;
+    flex-grow: 1;
+    text-align: left;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.copy-btn {
+    background-color: #e7e7e7;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: clamp(12px, 2vw, 14px);
+    white-space: nowrap;
+}
+
+.copy-btn:hover {
+    background-color: #d4d4d4;
+}
+
+.copy-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#pseudoList li:only-child {
+    text-align: center;
+    padding: 15px;
+    color: #ff6b6b;
+    font-weight: bold;
+    border-left: 3px solid #ff6b6b;
+}
+
+.signature {
+    font-size: 0.8rem;
+    color : #888;
+    font-style: italic;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .container, .pseudo {
+        width: 95%;
+        padding: 15px;
+        margin: 15px auto;
+    }
+    
+    footer {
+        padding: 15px;
+    }
+    
+    input {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container, .pseudo {
+        width: 100%;
+        padding: 10px;
+        margin: 10px auto;
+    }
+    
+    #pseudoList li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .pseudo-text {
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    
+    .copy-btn {
+        width: 100%;
+    }
+}

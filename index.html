@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Générateur de pseudos</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Bienvenu dans mon<strong> Générateur de pseudos</strong> !</h1>
+            <p>Entrez vos informations :</p>
+            <input type="text" id="inputPseudo" placeholder="Votre prénom, mot préféré, etc..">
+            <br><br>
+            <button id="btnGenerer" class="btn">Générer</button>
+        </div>
+
+        <div class="pseudo">
+            <h2><strong>Voici vos pseudos générés :</strong></h2>
+            <ul id="pseudoList">
+                <!-- Les pseudos générés seront insérés ici -->
+            </ul>
+        </div>
+
+        <footer>
+            <h1>Informations</h1>
+            <button id="btnEnSavoirPlus" class="btn">En savoir plus</button>
+            <p class="signature">@ noksse production</p>
+        </footer>
+
+        <script>
+            document.getElementById("btnEnSavoirPlus").addEventListener("click", function() {
+            window.location.href = "contact.html";
+        });
+            // Fonction pour transformer créativement un nom/prénom
+            function transformerNom(nom) {
+                // Si le nom est trop court, on le modifie peu
+                if (nom.length < 3) {
+                    return nom;
+                }
+                
+                // Dictionnaire de suffixes créatifs
+                const suffixesCreatifs = ["mari", "ius", "ix", "or", "ander", "ian", "ax", "eon", "us", "ius", 
+                                         "ix", "ax", "is", "ex", "on", "ium", "ator", "enza", "ero", "ella"];
+                
+                // Dictionnaire de préfixes créatifs
+                const prefixesCreatifs = ["Zy", "Xan", "Vex", "Neo", "Mel", "Kry", "Jax", "Hy", "Gal", "Dra", 
+                                         "Aer", "Cy", "By", "Tyr", "Pho", "Om", "Nex"];
+                
+                // Différentes stratégies de transformation
+                const strategies = [
+                    // Stratégie 1: Garder le début et changer la fin
+                    function() {
+                        const longueurGardee = Math.ceil(nom.length / 2);
+                        const debut = nom.substring(0, longueurGardee);
+                        const suffix = suffixesCreatifs[Math.floor(Math.random() * suffixesCreatifs.length)];
+                        return debut + suffix;
+                    },
+                    
+                    // Stratégie 2: Remplacer le début, garder la fin
+                    function() {
+                        const longueurFinale = Math.ceil(nom.length / 2);
+                        const fin = nom.substring(nom.length - longueurFinale);
+                        const prefix = prefixesCreatifs[Math.floor(Math.random() * prefixesCreatifs.length)];
+                        return prefix + fin;
+                    },
+                    
+                    // Stratégie 3: Mélanger les voyelles
+                    function() {
+                        const voyelles = ['a', 'e', 'i', 'o', 'u', 'y'];
+                        const nouvellesVoyelles = ['a', 'e', 'i', 'o', 'u', 'y', 'ae', 'ea', 'io', 'ya', 'ou'];
+                        
+                        return nom.split('').map(char => {
+                            if (voyelles.includes(char.toLowerCase())) {
+                                const nouvelleVoyelle = nouvellesVoyelles[Math.floor(Math.random() * nouvellesVoyelles.length)];
+                                return Math.random() < 0.7 ? nouvelleVoyelle : char;
+                            }
+                            return char;
+                        }).join('');
+                    },
+                    
+                    // Stratégie 4: Inverser et modifier
+                    function() {
+                        // Inverser puis garder seulement une partie
+                        const inverse = nom.split('').reverse().join('');
+                        const longueurGardee = Math.ceil(inverse.length * 0.7);
+                        const partie = inverse.substring(0, longueurGardee);
+                        
+                        // Ajouter un suffixe
+                        const suffix = suffixesCreatifs[Math.floor(Math.random() * suffixesCreatifs.length)];
+                        return partie + suffix;
+                    },
+                    
+                    // Stratégie 5: Combiner avec un élément fantaisiste
+                    function() {
+                        const elements = ["fire", "star", "shadow", "night", "storm", "frost", "blade", "soul", 
+                                         "sky", "wind", "dragon", "wolf", "fox", "moon", "sun", "cloud"];
+                        const element = elements[Math.floor(Math.random() * elements.length)];
+                        
+                        // Prendre une partie du nom original
+                        const partieDuNom = nom.substring(0, Math.ceil(nom.length / 2));
+                        
+                        // 50% de chance de mettre l'élément avant ou après
+                        return Math.random() < 0.5 ? partieDuNom + element : element + partieDuNom;
+                    }
+                ];
+                
+                // Choisir une stratégie au hasard
+                const strategie = strategies[Math.floor(Math.random() * strategies.length)];
+                return strategie();
+            }
+
+            // Fonction pour générer un pseudo simple avec préfixe, suffixe et style "leet"
+            function genererPseudoSimple(base) {
+                const prefixes = ["The", "Mr", "Lil", "Dark", "Neo", "Cyber", "X", "Ez"];
+                const suffixes = ["_x", "99", "YT", "TV", "Pro", "One", "V2", "404"];
+                const leetMap = { a: "4", e: "3", o: "0", i: "1", s: "5" };
+
+                // 50% de chance de transformer créativement le nom de base
+                let pseudo = Math.random() < 0.5 ? transformerNom(base.toLowerCase()) : base.toLowerCase();
+                
+                let changementsAppliques = 0;
+                const maxChangements = 3;
+                
+                // Liste des transformations possibles
+                const transformations = [
+                    // Transformation 1: Appliquer le style leet
+                    function applyLeet() {
+                        pseudo = pseudo.split('').map(char => {
+                            return Math.random() < 0.3 && leetMap[char] ? leetMap[char] : char;
+                        }).join('');
+                        changementsAppliques++;
+                    },
+                    
+                    // Transformation 2: Capitalisation
+                    function applyCaps() {
+                        if (Math.random() < 0.5) {
+                            pseudo = pseudo[0].toUpperCase() + pseudo.slice(1);
+                        } else {
+                            pseudo = pseudo.split('').map(c => Math.random() < 0.3 ? c.toUpperCase() : c).join('');
+                        }
+                        changementsAppliques++;
+                    },
+                    
+                    // Transformation 3: Ajouter un préfixe
+                    function addPrefix() {
+                        const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+                        pseudo = prefix + pseudo;
+                        changementsAppliques++;
+                    },
+                    
+                    // Transformation 4: Ajouter un suffixe
+                    function addSuffix() {
+                        const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+                        pseudo = pseudo + suffix;
+                        changementsAppliques++;
+                    },
+                    
+                    // Transformation 5: Ajouter un numéro
+                    function addNumber() {
+                        const number = Math.floor(Math.random() * 100);
+                        pseudo = pseudo + number;
+                        changementsAppliques++;
+                    }
+                ];
+                
+                // Mélanger les transformations pour les appliquer de façon aléatoire
+                transformations.sort(() => Math.random() - 0.5);
+                
+                // Appliquer aléatoirement les transformations jusqu'à ce qu'on atteigne le max
+                for (let i = 0; i < transformations.length && changementsAppliques < maxChangements; i++) {
+                    // Appliquer la transformation avec 70% de chance
+                    if (Math.random() < 0.7) {
+                        transformations[i]();
+                    }
+                }
+                
+                // Si aucun changement n'a été appliqué, en forcer au moins un
+                if (changementsAppliques === 0) {
+                    const randomTransform = Math.floor(Math.random() * transformations.length);
+                    transformations[randomTransform]();
+                }
+
+                // Retourne le pseudo généré
+                return pseudo;
+            }
+
+            // Fonction pour copier le texte dans le presse-papiers
+            function copyToClipboard(text, button) {
+                navigator.clipboard.writeText(text).then(() => {
+                    // Indiquer visuellement que la copie a réussi
+                    button.textContent = "✓";
+                    button.classList.add("copy-success");
+                    
+                    // Restaurer le bouton après 2 secondes
+                    setTimeout(() => {
+                        button.textContent = "Copier";
+                        button.classList.remove("copy-success");
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Erreur lors de la copie:', err);
+                    button.textContent = "Erreur";
+                    
+                    // Restaurer le bouton après 2 secondes
+                    setTimeout(() => {
+                        button.textContent = "Copier";
+                    }, 2000);
+                });
+            }
+
+            // Fonction pour générer plusieurs pseudos à partir de l'input de l'utilisateur
+            function genererPseudosDepuisInput() {
+                const input = document.getElementById("inputPseudo").value.trim();
+                const pseudoList = document.getElementById("pseudoList");
+
+                // Vérification que l'input n'est pas vide
+                if (input === "") {
+                    pseudoList.innerHTML = "<li>👉 Écris quelque chose d'abord !</li>";
+                    return;
+                }
+
+                // Réinitialiser la liste des pseudos
+                pseudoList.innerHTML = "";
+
+                // Générer 5 pseudos et les ajouter à la liste
+                const pseudos = [];
+                for (let i = 0; i < 5; i++) {
+                    pseudos.push(genererPseudoSimple(input));
+                }
+
+                // Créer les éléments <li> pour chaque pseudo avec bouton de copie
+                pseudos.forEach(pseudo => {
+                    // Créer l'élément <li>
+                    const li = document.createElement("li");
+                    
+                    // Créer un span pour le texte du pseudo
+                    const pseudoText = document.createElement("span");
+                    pseudoText.className = "pseudo-text";
+                    pseudoText.textContent = pseudo;
+                    
+                    // Créer un bouton de copie
+                    const copyButton = document.createElement("button");
+                    copyButton.textContent = "Copier";
+                    copyButton.className = "copy-btn";
+                    
+                    // Ajouter un événement au clic pour copier le texte
+                    copyButton.addEventListener("click", function() {
+                        copyToClipboard(pseudo, copyButton);
+                    });
+                    
+                    // Ajouter le texte et le bouton à l'élément <li>
+                    li.appendChild(pseudoText);
+                    li.appendChild(copyButton);
+                    
+                    // Ajouter l'élément <li> à la liste
+                    pseudoList.appendChild(li);
+                });
+            }
+
+            // Ajouter l'événement 'click' au bouton
+            document.addEventListener("DOMContentLoaded", function () {
+                const btnGenerer = document.getElementById("btnGenerer");
+
+                // Vérifier si le bouton est bien sélectionné
+                if (btnGenerer) {
+                    // Ajouter un événement au clic
+                    btnGenerer.addEventListener("click", genererPseudosDepuisInput);
+                    
+                    // Permettre de générer en appuyant sur la touche Entrée
+                    document.getElementById("inputPseudo").addEventListener("keypress", function(event) {
+                        if (event.key === "Enter") {
+                            genererPseudosDepuisInput();
+                        }
+                    });
+                } else {
+                    console.log("Le bouton n'a pas été trouvé !");
+                }
+            });
+        </script>
+    </body>
+</html>

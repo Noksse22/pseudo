@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Générateur de pseudos</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>A propos</h1>
+            <p>Mon site consiste a générer des pseudos pour les personnes qui en aurait besoin, pour par exemple :
+                <ul>
+                    <li>Les jeux vidéos</li>
+                    <li>Les réseaux sociaux</li>
+                    <li>N'importe quelle autre plateforme</li>
+                </ul>
+            </p>
+            <p>Le principe est assez simple, vous entrez votre prénom, une phrase ou autre choses et vous appuyer sur le bouton "Générer". 5 pseudos vont vous êtres proposés</p>
+            <p>Le site n'est pas encore tout a fais au point, il n'y a pas encore une immense variété de pseudos et il n'y a pas encore de filtre pour les pseudos.</p>
+            <p>A venir bientôt pour améliorer le site :
+                <ul>
+                    <li>L'ia</li>
+                    <li>Des filtres</li>
+                    <li>Vos propositions</li>
+                </ul>
+            </p>
+            <button id="btnAcceuil" class="btn">Retourner a la génération</button>
+        </div>
+        <footer>
+            <h1>Me contacter</h1>
+            <p>Si vous voulez me contacter pour me faire par de vos retours, des problèmes que vous subissez ou pour m'aider a améliorer le site.</p>
+            <p>Appuyez sur le bouton ci-dessous :</p>
+            <a href="mailto:jaflayan@gmail.com">
+                <button id="btnContact" class="btn">Me contacter</button>
+            </a>
+            <p class="signature">@ noksse production</p>
+        </footer>
+
+        <script>
+            document.getElementById("btnAcceuil").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+        </script>
+    </body>
+</html>
